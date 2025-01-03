@@ -1,33 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import useCounter from './hooks/useCounter';
+
+// Regra 1: Onde usar os hooks? 
+// Dentro de uma função React! Tem que está associado a um componente React
+
+// Regra 2: Ordem dos hooks?
+// Tem que ser declarado no Top level da função React e a ordem 
+// que foi declarado é a ordem que o React vai executar
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const counter = useCounter(); 
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={counter.increment}>
+          count is {counter.count}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
