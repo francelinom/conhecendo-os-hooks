@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import './App.css'
 import useCounter from './hooks/useCounter';
 
@@ -11,17 +12,40 @@ import useCounter from './hooks/useCounter';
 
 function App() {
 
-  const counter = useCounter(); 
+  // const counter = useCounter();
+  const [password, setPassword] = useState('');
+  const [labelCopy, setLabelCopy] = useState('Copiar senha');
+
+  function handleCopy() {
+    setLabelCopy('Senha copiada');
+  }
+
+  function generatePassword() {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let password = '';
+  
+    for (let i = 0; i < 10; i++) {
+      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+      password += caracteres.charAt(indiceAleatorio);
+    }
+    
+    setLabelCopy('Copiar senha');
+    return setPassword(password);
+  }
+  
 
   return (
     <>
-      <h1>Vite + React</h1>
+      <h1>Gerador de senhas</h1>
       <div className="card">
-        <button onClick={counter.increment}>
-          count is {counter.count}
+        <button onClick={generatePassword}>
+          Gerar senha
+        </button>
+        <button onClick={handleCopy}>
+          {labelCopy}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          {password}
         </p>
       </div>
     </>
