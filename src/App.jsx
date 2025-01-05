@@ -16,7 +16,10 @@ function App() {
   // const counter = useCounter();
   const [password, setPassword] = useState('');
   const [labelCopy, setLabelCopy] = useState('Copiar senha');
-  const [passwordSize, setPasswordSize] = useState(10);
+  const [customSize, setCustomSize] = useState(10);
+  const [showInput, setShowInput] = useState(true);
+
+  const passwordSize = showInput ? customSize : 10;
 
   function handleCopy() {
     window.navigator.clipboard.writeText(password);
@@ -41,10 +44,23 @@ function App() {
     <>
       <h1>Gerador de senhas</h1>
       <div className="card">
-        <div className="marginInput">
-          <label htmlFor="passwordSize">Tamanho:</label>
-          <Input passwordSize={passwordSize} setPasswordSize={setPasswordSize}/>
+        <div>
+          <label htmlFor="customSize">Customizar Tamanho: </label>
+          <input
+              type="checkbox"
+              id="customSize"
+              value={showInput}
+              onChange={() => setShowInput(!showInput)}
+          />
         </div>
+
+        {showInput && (
+            <div className="marginInput">
+              <label htmlFor="passwordSize">Tamanho:</label>
+              <Input passwordSize={customSize} setPasswordSize={setCustomSize}/>
+            </div>
+        )}
+
         <button onClick={generatePassword}>
           Gerar senha de {passwordSize} caracteres
         </button>
