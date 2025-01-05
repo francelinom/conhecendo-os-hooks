@@ -15,6 +15,7 @@ function App() {
   // const counter = useCounter();
   const [password, setPassword] = useState('');
   const [labelCopy, setLabelCopy] = useState('Copiar senha');
+  const [passwordSize, setPaswordSize] = useState(10);
 
   function handleCopy() {
     window.navigator.clipboard.writeText(password);
@@ -25,7 +26,7 @@ function App() {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let password = '';
   
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < passwordSize; i++) {
       const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
       password += caracteres.charAt(indiceAleatorio);
     }
@@ -39,12 +40,17 @@ function App() {
     <>
       <h1>Gerador de senhas</h1>
       <div className="card">
-        <div>
+        <div className="marginInput">
           <label htmlFor="passwordSize">Tamanho:</label>
-          <input type="number" id="passwordSize" />
+          <input 
+            type="number" 
+            id="passwordSize" 
+            min={1}
+            value={passwordSize}
+            onChange={(ev) => setPaswordSize(ev.target.value)}/>
         </div>
         <button onClick={generatePassword}>
-          Gerar senha
+          Gerar senha de {passwordSize} caracteres
         </button>
         <button onClick={handleCopy}>
           {labelCopy}
