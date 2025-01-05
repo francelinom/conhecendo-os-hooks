@@ -17,6 +17,7 @@ function App() {
   const [labelCopy, setLabelCopy] = useState('Copiar senha');
 
   function handleCopy() {
+    window.navigator.clipboard.writeText(password);
     setLabelCopy('Senha copiada');
   }
 
@@ -38,6 +39,10 @@ function App() {
     <>
       <h1>Gerador de senhas</h1>
       <div className="card">
+        <div>
+          <label htmlFor="passwordSize">Tamanho:</label>
+          <input type="number" id="passwordSize" />
+        </div>
         <button onClick={generatePassword}>
           Gerar senha
         </button>
