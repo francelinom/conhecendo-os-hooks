@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
 import './App.css'
-import useCounter from './hooks/useCounter';
+// import useCounter from './hooks/useCounter';
+import Input from "./components/Input.jsx";
 
 // Regra 1: Onde usar os hooks? 
 // Dentro de uma função React! Tem que está associado a um componente React
@@ -15,7 +16,7 @@ function App() {
   // const counter = useCounter();
   const [password, setPassword] = useState('');
   const [labelCopy, setLabelCopy] = useState('Copiar senha');
-  const [passwordSize, setPaswordSize] = useState(10);
+  const [passwordSize, setPasswordSize] = useState(10);
 
   function handleCopy() {
     window.navigator.clipboard.writeText(password);
@@ -42,12 +43,7 @@ function App() {
       <div className="card">
         <div className="marginInput">
           <label htmlFor="passwordSize">Tamanho:</label>
-          <input 
-            type="number" 
-            id="passwordSize" 
-            min={1}
-            value={passwordSize}
-            onChange={(ev) => setPaswordSize(ev.target.value)}/>
+          <Input passwordSize={passwordSize} setPasswordSize={setPasswordSize}/>
         </div>
         <button onClick={generatePassword}>
           Gerar senha de {passwordSize} caracteres
